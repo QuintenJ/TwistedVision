@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using RLNET;
 using TwistedVision.Core;
+using TwistedVision.Systems;
 
 
 namespace TwistedVision
 {
     class Game
     {
+        public static DungeonMap DungeonMap { get; private set; }
         // The screen height and width are in number of tiles
         private static readonly int _screenWidth = 100;
         private static readonly int _screenHeight = 70;
@@ -39,6 +41,9 @@ namespace TwistedVision
 
         static void Main()
         {
+            MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight);
+            DungeonMap = mapGenerator.CreateMap();
+
             // This must be the exact name of the bitmap font file we are using or it will error
             string fontFileName = "terminal8x8.png";
             // The title will apear at the top of the console window
@@ -77,6 +82,8 @@ namespace TwistedVision
         // Event handler for RLNET's Render event
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
         {
+
+            DungeonMap.Draw(_mapConsole);
             // Blit the sub consoles to the root console in the correct locations
             RLConsole.Blit(_mapConsole, 0, 0, _mapWidth, _mapHeight,
               _rootConsole, 0, _inventoryHeight);
