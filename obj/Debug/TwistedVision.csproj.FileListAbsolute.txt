@@ -1,0 +1,14 @@
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\terminal8x8.png
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\TwistedVision.exe.config
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\TwistedVision.exe
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\TwistedVision.pdb
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\OpenTK.dll
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\RLNET.dll
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\RogueSharp.dll
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\OpenTK.xml
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\OpenTK.dll.config
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.csprojAssemblyReference.cache
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.csproj.CoreCompileInputs.cache
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.csproj.CopyComplete
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.exe
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.pdb
