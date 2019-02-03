@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RLNET;    
+using RLNET;
+using TwistedVision.Core;
+
 
 namespace TwistedVision
 {
@@ -60,17 +62,17 @@ namespace TwistedVision
         {
             //Set background color and text for each console
             // so that we can verify they are in the correct positons
-            _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, RLColor.Black);
-            _mapConsole.Print(1, 1, "Map", RLColor.White);
+            _mapConsole.SetBackColor(0, 0, _mapWidth, _mapHeight, Colors.FloorBackground);
+            _mapConsole.Print(1, 1, "Map", Colors.TextHeading);
 
-            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, RLColor.Gray);
-            _messageConsole.Print(1, 1, "Messages", RLColor.White);
+            _messageConsole.SetBackColor(0, 0, _messageWidth, _messageHeight, Palette.DbDeepWater);
+            _messageConsole.Print(1, 1, "Messages", Colors.TextHeading);
 
-            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, RLColor.Brown);
-            _statConsole.Print(1, 1, "Stats", RLColor.White);
+            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Palette.DbOldStone);
+            _statConsole.Print(1, 1, "Stats", Colors.TextHeading);
 
-            _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, RLColor.Cyan);
-            _inventoryConsole.Print(1, 1, "Inventory", RLColor.White);
+            _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Palette.DbWood);
+            _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
         }
         // Event handler for RLNET's Render event
         private static void OnRootConsoleRender(object sender, UpdateEventArgs e)
