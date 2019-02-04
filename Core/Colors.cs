@@ -9,6 +9,7 @@ namespace TwistedVision.Core
 {
     class Colors
     {
+        public static RLColor Player = Palette.DbLight;
         public static RLColor FloorBackground = RLColor.Black;
         public static RLColor Floor = Palette.AlternateDarkest;
         public static RLColor FloorBackgroundFov = Palette.DbDark;
