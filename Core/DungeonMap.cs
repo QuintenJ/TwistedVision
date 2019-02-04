@@ -14,6 +14,14 @@ namespace TwistedVision.Core
     // Our custom DungeonMap class extends the base RogueSharp Map class
     public class DungeonMap : Map
     {
+        public List<Rectangle> Rooms;
+
+        public DungeonMap()
+        {
+            // Initialize the list of rooms when we create a new DungeonMap
+            Rooms = new List<Rectangle>();
+        }
+
         // This method will be called any time we move the player to update field-of-view
         public void UpdatePlayerFieldOfView()
         {
@@ -79,7 +87,7 @@ namespace TwistedVision.Core
                 return;
             }
 
-            // When a cell is currently in the field-of-view it should be drawn with ligher colors
+            // When a cell is currently in the field-of-view it should be drawn with lighter colors
             if (IsInFov(cell.X, cell.Y))
             {
                 // Choose the symbol to draw based on if the cell is walkable or not
