@@ -12,3 +12,4 @@ C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\Twis
 C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.csproj.CopyComplete
 C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.exe
 C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\obj\Debug\TwistedVision.pdb
+C:\Users\Quinten\Desktop\C#\RogueLike\TwistedVision\TwistedVision\bin\Debug\RogueSharp.xml

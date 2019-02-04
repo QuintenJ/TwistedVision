@@ -6,13 +6,61 @@ using System.Threading.Tasks;
 using RLNET;
 using RogueSharp;
 using TwistedVision.Core;
+using TwistedVision.Systems;
+using TwistedVision.Interfaces;
 
 namespace TwistedVision.Core
 {
-    // Custom DungeonMap class extends on the base RogueSharp Map class
+    // Our custom DungeonMap class extends the base RogueSharp Map class
     public class DungeonMap : Map
     {
-        //The Draw method will be called each time the map is updated
+        // This method will be called any time we move the player to update field-of-view
+        public void UpdatePlayerFieldOfView()
+        {
+            Player player = Game.Player;
+            // Compute the field-of-view based on the player's location and awareness
+            ComputeFov(player.X, player.Y, player.Awareness, true);
+            // Mark all cells in field-of-view as having been explored
+            foreach (Cell cell in GetAllCells())
+            {
+                if (IsInFov(cell.X, cell.Y))
+                {
+                    SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
+                }
+            }
+        }
+
+        // Returns true when able to place the Actor on the cell or false otherwise
+        public bool SetActorPosition(Actor actor, int x, int y)
+        {
+            // Only allow actor placement if the cell is walkable
+            if (GetCell(x, y).IsWalkable)
+            {
+                // The cell the actor was previously on is now walkable
+                SetIsWalkable(actor.X, actor.Y, true);
+                // Update the actor's position
+                actor.X = x;
+                actor.Y = y;
+                // The new cell the actor is on is now not walkable
+                SetIsWalkable(actor.X, actor.Y, false);
+                // Don't forget to update the field of view if we just repositioned the player
+                if (actor is Player)
+                {
+                    UpdatePlayerFieldOfView();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        // A helper method for setting the IsWalkable property on a Cell
+        public void SetIsWalkable(int x, int y, bool isWalkable)
+        {
+            Cell cell = GetCell(x, y);
+            SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
+        }
+
+        // The Draw method will be called each time the map is updated
         // It will render all of the symbols/colors for each cell to the map sub console
         public void Draw(RLConsole mapConsole)
         {
@@ -25,13 +73,13 @@ namespace TwistedVision.Core
 
         private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
         {
-            //When we haven't explored a cell yet, we don't want to draw anything
+            // When we haven't explored a cell yet, we don't want to draw anything
             if (!cell.IsExplored)
             {
                 return;
             }
 
-            // When a cell is currently in the field-of-view it should be drawn with lighter colors
+            // When a cell is currently in the field-of-view it should be drawn with ligher colors
             if (IsInFov(cell.X, cell.Y))
             {
                 // Choose the symbol to draw based on if the cell is walkable or not
@@ -55,20 +103,6 @@ namespace TwistedVision.Core
                 else
                 {
                     console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
-                }
-            }
-        }
-        public void UpdatePlayerFieldOfView()
-        {
-            Player player = Game.Player;
-            // Compute the field-of-view vased on the player's location and awareness
-            ComputeFov(player.X, player.Y, player.Awareness, true);
-            // Mark all cells in field-of-view as having been explored
-            foreach (Cell cell in GetAllCells())
-            {
-                if (IsInFov(cell.X, cell.Y))
-                {
-                    SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
                 }
             }
         }
