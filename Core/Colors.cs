@@ -7,10 +7,9 @@ using RLNET;
 
 namespace TwistedVision.Core
 {
-    class Colors
+    public class Colors
     {
         public static RLColor KoboldColor = Palette.DbBrightWood;
-        public static RLColor Player = Palette.DbLight;
         public static RLColor FloorBackground = RLColor.Black;
         public static RLColor Floor = Palette.AlternateDarkest;
         public static RLColor FloorBackgroundFov = Palette.DbDark;
@@ -21,6 +20,10 @@ namespace TwistedVision.Core
         public static RLColor WallBackgroundFov = Palette.SecondaryDarker;
         public static RLColor WallFov = Palette.SecondaryLighter;
 
-        public static RLColor TextHeading = Palette.DbLight;
+        public static RLColor TextHeading = RLColor.White;
+        public static RLColor Text = Palette.DbLight;
+        public static RLColor Gold = Palette.DbSun;
+
+        public static RLColor Player = Palette.DbLight;
     }
 }

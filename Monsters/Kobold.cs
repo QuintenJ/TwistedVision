@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TwistedVision.Core;
 using RogueSharp.DiceNotation;
+using RLNET;
 
 namespace TwistedVision.Monsters
 {

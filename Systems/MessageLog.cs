@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RLNET;
+using TwistedVision.Core;
 
 namespace TwistedVision.Systems
 {
+    // Represents a queue of messages that can be added to and drawn to a RLConsole
     public class MessageLog
     {
         // Define the maximum number of lines to store
@@ -36,11 +38,10 @@ namespace TwistedVision.Systems
         // Draw each line of the MessageLog queue to the console
         public void Draw(RLConsole console)
         {
-            console.Clear();
             string[] lines = _lines.ToArray();
             for (int i = 0; i < lines.Length; i++)
             {
-                console.Print(1, i + 1, lines[i], RLColor.White);
+                console.Print(1, i + 1, lines[i], Colors.Text);
             }
         }
     }
