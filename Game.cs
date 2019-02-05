@@ -40,7 +40,7 @@ namespace TwistedVision
 
         private static bool _renderRequired = true;
 
-        public static Player Player { get; private set; }
+        public static Player Player { get; set; }
         public static DungeonMap DungeonMap { get; private set; }
         public static CommandSystem CommandSystem { get; private set; }
 
@@ -57,7 +57,7 @@ namespace TwistedVision
             string fontFileName = "terminal8x8.png";
 
             // The title will appear at the top of the console window along with the seed used to generate the level
-            string consoleTitle = $"RougeSharp V3 Tutorial - Level 1 - Seed {seed}";
+            string consoleTitle = $"Twisted Vision - Level 1 - Seed {seed}";
 
             // Tell RLNet to use the bitmap font that we specified and that each tile is 8 x 8 pixels
             _rootConsole = new RLRootConsole(fontFileName, _screenWidth, _screenHeight, 8, 8, 1f, consoleTitle);
@@ -68,7 +68,7 @@ namespace TwistedVision
             _statConsole = new RLConsole(_statWidth, _statHeight);
             _inventoryConsole = new RLConsole(_inventoryWidth, _inventoryHeight);
 
-            Player = new Player();
+           
             MapGenerator mapGenerator = new MapGenerator(_mapWidth, _mapHeight, 20, 13, 7);
             DungeonMap = mapGenerator.CreateMap();
             DungeonMap.UpdatePlayerFieldOfView();
