@@ -14,11 +14,14 @@ namespace TwistedVision.Core
     // Our custom DungeonMap class extends the base RogueSharp Map class
     public class DungeonMap : Map
     {
+        private readonly List<Monster> _monsters;
+
         public List<Rectangle> Rooms;
 
         public DungeonMap()
         {
-            // Initialize the list of rooms when we create a new DungeonMap
+            // Initialize all the lists when we create a new DungeonMap
+            _monsters = new List<Monster>();
             Rooms = new List<Rectangle>();
         }
 
@@ -61,11 +64,62 @@ namespace TwistedVision.Core
             return false;
         }
 
+        // Called by MapGenerator after we generate a new map to add the player to the map
+        public void AddPlayer(Player player)
+        {
+            Game.Player = player;
+            SetIsWalkable(player.X, player.Y, false);
+            UpdatePlayerFieldOfView();
+        }
+
+        public void AddMonster(Monster monster)
+        {
+            _monsters.Add(monster);
+            // After adding the monster to the map make sure to make the cell not walkable
+            SetIsWalkable(monster.X, monster.Y, false);
+        }
+
         // A helper method for setting the IsWalkable property on a Cell
         public void SetIsWalkable(int x, int y, bool isWalkable)
         {
             Cell cell = GetCell(x, y);
             SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
+        }
+
+        // Look for a random location in the room that is walkable.
+        public Point GetRandomWalkableLocationInRoom(Rectangle room)
+        {
+            if (DoesRoomHaveWalkableSpace(room))
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    int x = Game.Random.Next(1, room.Width - 2) + room.X;
+                    int y = Game.Random.Next(1, room.Height - 2) + room.Y;
+                    if (IsWalkable(x, y))
+                    {
+                        return new Point(x, y);
+                    }
+                }
+            }
+
+            // If we didn't find a walkable location in the room return null
+            return null;
+        }
+
+        // Iterate through each Cell in the room and return true if any are walkable
+        public bool DoesRoomHaveWalkableSpace(Rectangle room)
+        {
+            for (int x = 1; x <= room.Width - 2; x++)
+            {
+                for (int y = 1; y <= room.Height - 2; y++)
+                {
+                    if (IsWalkable(x + room.X, y + room.Y))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // The Draw method will be called each time the map is updated
@@ -76,6 +130,12 @@ namespace TwistedVision.Core
             foreach (Cell cell in GetAllCells())
             {
                 SetConsoleSymbolForCell(mapConsole, cell);
+            }
+
+            // Iterate through each monster on the map and draw it after drawing the Cells
+            foreach (Monster monster in _monsters)
+            {
+                monster.Draw(mapConsole, this);
             }
         }
 
@@ -113,14 +173,6 @@ namespace TwistedVision.Core
                     console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
                 }
             }
-        }
-
-        // Called by MapGenerator after we generate a new map to add the player to the map
-        public void AddPlayer(Player player)
-        {
-            Game.Player = player;
-            SetIsWalkable(player.X, player.Y, false);
-            UpdatePlayerFieldOfView();
         }
     }
 }

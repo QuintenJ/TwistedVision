@@ -58,7 +58,7 @@ namespace TwistedVision
             string fontFileName = "terminal8x8.png";
 
             // The title will appear at the top of the console window along with the seed used to generate the level
-            string consoleTitle = $"RougeSharp V3 Tutorial - Level 1 - Seed {seed}";
+            string consoleTitle = $"Twisted Vision - Level 1 - Seed {seed}";
 
             // Create a new MessageLog and print the random seed used to generate the level
             MessageLog = new MessageLog();
