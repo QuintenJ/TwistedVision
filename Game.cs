@@ -40,9 +40,6 @@ namespace TwistedVision
 
         private static bool _renderRequired = true;
 
-        // Temporary variable just to show our MessageLog is working
-        private static int _steps = 0;
-
         public static Player Player { get; set; }
         public static DungeonMap DungeonMap { get; private set; }
         public static MessageLog MessageLog { get; private set; }
@@ -61,7 +58,7 @@ namespace TwistedVision
             string fontFileName = "terminal8x8.png";
 
             // The title will appear at the top of the console window along with the seed used to generate the level
-            string consoleTitle = $"Twisted Vision - Level 1 - Seed {seed}";
+            string consoleTitle = $"RougeSharp V3 Tutorial - Level 1 - Seed {seed}";
 
             // Create a new MessageLog and print the random seed used to generate the level
             MessageLog = new MessageLog();
@@ -90,9 +87,6 @@ namespace TwistedVision
             _rootConsole.Render += OnRootConsoleRender;
 
             // Set background color and text for each console so that we can verify they are in the correct positions
-            _statConsole.SetBackColor(0, 0, _statWidth, _statHeight, Palette.DbOldStone);
-            _statConsole.Print(1, 1, "Stats", Colors.TextHeading);
-
             _inventoryConsole.SetBackColor(0, 0, _inventoryWidth, _inventoryHeight, Palette.DbWood);
             _inventoryConsole.Print(1, 1, "Inventory", Colors.TextHeading);
 
@@ -132,7 +126,6 @@ namespace TwistedVision
 
             if (didPlayerAct)
             {
-                MessageLog.Add($"Step # {++_steps}");
                 _renderRequired = true;
             }
         }
@@ -145,6 +138,7 @@ namespace TwistedVision
             {
                 DungeonMap.Draw(_mapConsole);
                 Player.Draw(_mapConsole, DungeonMap);
+                Player.DrawStats(_statConsole);
                 MessageLog.Draw(_messageConsole);
 
                 // Blit the sub consoles to the root console in the correct locations
