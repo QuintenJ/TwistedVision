@@ -15,6 +15,11 @@ namespace TwistedVision.Core
         public static RLColor FloorBackgroundFov = Palette.DbDark;
         public static RLColor FloorFov = Palette.Alternate;
 
+        public static RLColor DoorBackground = Palette.ComplimentDarkest;
+        public static RLColor Door = Palette.ComplimentLighter;
+        public static RLColor DoorBackgroundFov = Palette.ComplimentDarker;
+        public static RLColor DoorFov = Palette.ComplimentLightest;
+
         public static RLColor WallBackground = Palette.SecondaryDarkest;
         public static RLColor Wall = Palette.Secondary;
         public static RLColor WallBackgroundFov = Palette.SecondaryDarker;
