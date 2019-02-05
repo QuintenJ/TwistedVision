@@ -7,12 +7,14 @@ using RLNET;
 using RogueSharp;
 using TwistedVision.Core;
 using RogueSharp.DiceNotation;
-
+using TwistedVision.Interfaces;
 
 namespace TwistedVision.Systems
 {
     public class CommandSystem
     {
+        public bool IsPlayerTurn { get; set; }
+
         // Return value is true if the player was able to move
         // false when the player couldn't move, such as trying to move into a wall
         public bool MovePlayer(Direction direction)
@@ -62,6 +64,44 @@ namespace TwistedVision.Systems
             }
 
             return false;
+        }
+
+        public void EndPlayerTurn()
+        {
+            IsPlayerTurn = false;
+        }
+
+        public void ActivateMonsters()
+        {
+            IScheduleable scheduleable = Game.SchedulingSystem.Get();
+            if (scheduleable is Player)
+            {
+                IsPlayerTurn = true;
+                Game.SchedulingSystem.Add(Game.Player);
+            }
+            else
+            {
+                Monster monster = scheduleable as Monster;
+
+                if (monster != null)
+                {
+                    monster.PerformAction(this);
+                    Game.SchedulingSystem.Add(monster);
+                }
+
+                ActivateMonsters();
+            }
+        }
+
+        public void MoveMonster(Monster monster, Cell cell)
+        {
+            if (!Game.DungeonMap.SetActorPosition(monster, cell.X, cell.Y))
+            {
+                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y)
+                {
+                    Attack(monster, Game.Player);
+                }
+            }
         }
 
         public void Attack(Actor attacker, Actor defender)

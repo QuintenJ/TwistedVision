@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using RLNET;
 using RogueSharp;
+using TwistedVision.Behaviors;
+using TwistedVision.Systems;
 
 namespace TwistedVision.Core
 {
     public class Monster : Actor
     {
+        public int? TurnsAlerted { get; set; }
+
         public void DrawStats(RLConsole statConsole, int position)
         {
             // Start at Y=13 which is below the player stats.
@@ -25,6 +29,12 @@ namespace TwistedVision.Core
             statConsole.SetBackColor(3 + width, yPosition, remainingWidth, 1, Palette.PrimaryDarkest);
             // Print the monsters name over top of the health bar
             statConsole.Print(2, yPosition, $": {Name}", Palette.DbLight);
+        }
+
+        public virtual void PerformAction(CommandSystem commandSystem)
+        {
+            var behavior = new StandardMoveAndAttack();
+            behavior.Act(this, commandSystem);
         }
     }
 }

@@ -10,7 +10,7 @@ using RogueSharp;
 
 namespace TwistedVision.Core
 {
-    public class Actor : IActor, IDrawable
+    public class Actor : IActor, IDrawable, IScheduleable
     {
         // IActor
         private int _attack;
@@ -146,13 +146,13 @@ namespace TwistedVision.Core
 
         // IDrawable
         public RLColor Color { get; set; }
-        public char Symbol { get; set; }    
-        public int X { get; set; }  
-        public int Y { get; set; }  
+        public char Symbol { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public void Draw(RLConsole console, IMap map)
         {
             // Don't draw actors in cells that haven't been explored
-            if (!map.GetCell(X, Y ).IsExplored)
+            if (!map.GetCell(X, Y).IsExplored)
             {
                 return;
             }
@@ -164,8 +164,17 @@ namespace TwistedVision.Core
             }
             else
             {
-                // When not in field-of-view draw a normal floor
+                // When not in field-of-view just draw a normal floor
                 console.Set(X, Y, Colors.Floor, Colors.FloorBackground, '.');
+            }
+        }
+
+        // IScheduleable
+        public int Time
+        {
+            get
+            {
+                return Speed;
             }
         }
     }
